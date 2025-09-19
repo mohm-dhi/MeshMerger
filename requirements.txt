@@ -1,0 +1,6 @@
+flask
+werkzeug
+mikeio
+numpy
+triangle
+matplotlib

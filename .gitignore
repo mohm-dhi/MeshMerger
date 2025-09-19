@@ -1,0 +1,10 @@
+.vscode
+/nested_grids
+/20250606
+*.mesh
+*.dfsu
+*.dfs2
+*.msh
+__pycache__
+*.egg-info
+

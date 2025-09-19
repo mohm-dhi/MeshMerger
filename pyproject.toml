@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meshmerger"
+version = "0.1.0"
+description = "Web app for merging quadrilateral meshes into triangular meshes"
+authors = [{name="Your Name", email="your@email.com"}]
+license = {file = "LICENSE"}
+dependencies = [
+    "flask",
+    "werkzeug",
+    "mikeio",
+    "numpy",
+    "triangle",
+    "matplotlib"
+]
+
+[project.scripts]
+meshmerger = "meshmerger.app:run"
