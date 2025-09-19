@@ -56,7 +56,7 @@
    > meshmerger
    ```
    in the cmd. the following screen showed and you can open the application in your web-browser from the localhost link. 
-```bash
+  ```bash
     > meshmerger
     * Serving Flask app 'meshmerger.app'
     * Debug mode: off
@@ -64,7 +64,7 @@
     * Running on all addresses (0.0.0.0)
     * Running on http://127.0.0.1:5000
     * Running on http://192.168.2.42:5000
-    ```
+  ```
 
 
 3. **Prepare your meshes**  
