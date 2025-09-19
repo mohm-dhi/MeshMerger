@@ -24,7 +24,7 @@ def fake_merge(m1, m2):
 def create_app():
 
     app = Flask(__name__, static_folder="static", static_url_path="/static")
-    UPLOAD_FOLDER = "uploads"
+    UPLOAD_FOLDER = r"c:\temp\uploads"
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
     @app.route("/")

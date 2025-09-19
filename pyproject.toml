@@ -19,3 +19,4 @@ dependencies = [
 
 [project.scripts]
 meshmerger = "meshmerger.app:run"
+dfs2_to_mesh = "meshmerger.cli:main"

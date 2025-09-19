@@ -51,6 +51,21 @@
    ```bash
    pip install -e .
    ```
+  to run the application type 
+  ```bash
+   > meshmerger
+   ```
+   in the cmd. the following screen showed and you can open the application in your web-browser from the localhost link. 
+```bash
+    > meshmerger
+    * Serving Flask app 'meshmerger.app'
+    * Debug mode: off
+    WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+    * Running on all addresses (0.0.0.0)
+    * Running on http://127.0.0.1:5000
+    * Running on http://192.168.2.42:5000
+    ```
+
 
 3. **Prepare your meshes**  
    Convert `.dfs2` files into mesh format using either:
@@ -89,17 +104,22 @@
 
 1. Convert `.dfs2` → `.mesh`:
    ```bash
-   python dfs2_to_mesh.py mesh1.dfs2 mesh1.mesh
-   python dfs2_to_mesh.py mesh2.dfs2 mesh2.mesh
+   dfs2_to_mesh mesh1.dfs2 mesh1.mesh
+   dfs2_to_mesh mesh2.dfs2 mesh2.mesh
    ```
 
 2. Launch the software and load both meshes.  
 
-3. Define the boundary with **lasso/polygon**.  
+3. Define the boundary using **lasso** or **polygon selection** tool follow the video instruction below:
 
 4. Click **Merge**.  
 
 5. Retrieve merged result from `C:\temp\`.  
+
+## Video Instruction:
+![MeshMerger animation](meshmerger/static/MeshMerger.gif)
+
+
 
 ---
 
