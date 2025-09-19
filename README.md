@@ -1,7 +1,6 @@
-# Mesh Merge Tool
 
 <p align="center">
-  <img src="meshmerger/static/icon.png" alt="Mesh Merge Tool Logo" width="200"/>
+  <img src="meshmerger/static/icon.png" alt="Mesh Merge Tool Logo" width="300"/>
 </p>
 
 <p align="center">
