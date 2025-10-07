@@ -267,8 +267,9 @@ def update_boundary_codes(nodes, elems):
     return codes
 
 
-def merge(mesh1, mesh2, debug=False):
-    out_file = r"c:\\temp\\merged.mesh"
+def merge(mesh1, mesh2, out_file=None, debug=False):
+    if out_file == None:
+        out_file = r"c:\\temp\\merged.mesh"
     
     if isinstance(mesh1, str):
         ds = mikeio.Mesh(mesh1)
@@ -291,8 +292,6 @@ def merge(mesh1, mesh2, debug=False):
 
     uniq1 = [c for c in codes1 if c > 1]
     uniq2 = [c for c in codes2 if c > 1]
-    print(uniq1)
-    print(uniq2)
 
     if len(uniq1) != len(uniq2):
         raise ValueError(f"Meshes have different number of boundary codes: {len(uniq1)} vs {len(uniq2)}")
@@ -353,6 +352,6 @@ def merge(mesh1, mesh2, debug=False):
 if __name__ == "__main__":
     mesh1_file = r"C:\Users\mohm\Downloads\File 1-2 BanR BandI\2_3_I_cropped_sharedcode.mesh"
     mesh2_file = r"C:\Users\mohm\Downloads\File 1-2 BanR BandI\1_1_R_cropped_nobnd_sharedcode.mesh"
-    codes_list = [[2, 2], [3, 3], [4,4], [5,5], [6,6], [7,7]]
-    out_file = r"C:\Projects\Merge Gridded Mesh\20250606\cropsWesternSG3\D2-L-I-merged.mesh"
-    merge(mesh1_file, mesh2_file, debug=True)
+    out_file = r"C:\temp\merged.mesh"
+    merge(mesh1_file, mesh2_file, out_file=out_file, debug=True)
+    print("Merge is done!")
