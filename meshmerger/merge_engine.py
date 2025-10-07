@@ -127,7 +127,9 @@ def build_nodes_and_segments(line1, line2, num_parallel=1):
 
 
 def extract_boundary_edges(mesh):
-    edges_dict = defaultdict(list)
+    edge_count = defaultdict(int)
+    edge_map = {}
+
     for elem in mesh["elems"]:
         n = len(elem)
         for i in range(n):
@@ -135,9 +137,18 @@ def extract_boundary_edges(mesh):
             code_a, code_b = mesh["codes"][a], mesh["codes"][b]
             if code_a <= 1 or code_b <= 1:
                 continue
-            edges_dict[int(code_b)].append([int(a), int(b)])
-    return edges_dict
+            edge_key = tuple(sorted((a, b)))
+            edge_count[edge_key] += 1
+            edge_map[edge_key] = [a, b]
 
+    edges_dict = defaultdict(list)
+    for edge_key, count in edge_count.items():
+        if count == 1:
+            a, b = edge_map[edge_key]
+            code_b = mesh["codes"][b]
+            edges_dict[int(code_b)].append([int(a), int(b)])
+
+    return edges_dict
 
 def order_edges_strict(edges):
     adj = defaultdict(list)
@@ -259,6 +270,20 @@ def update_boundary_codes(nodes, elems):
 def merge(mesh1, mesh2, debug=False):
     out_file = r"c:\\temp\\merged.mesh"
     
+    if isinstance(mesh1, str):
+        ds = mikeio.Mesh(mesh1)
+        mesh1= dict()
+        mesh1["nodes"] = ds.node_coordinates
+        mesh1["elems"] = ds.element_table
+        mesh1["codes"] = ds.codes
+    if isinstance(mesh2, str):
+        ds = mikeio.Mesh(mesh2)
+        mesh2= dict()
+        mesh2["nodes"] = ds.node_coordinates
+        mesh2["elems"] = ds.element_table
+        mesh2["codes"] = ds.codes
+
+
     all_conn_nodes = []
     all_conn_elems = []
     codes1 = sorted(set(mesh1["codes"]))
@@ -266,6 +291,8 @@ def merge(mesh1, mesh2, debug=False):
 
     uniq1 = [c for c in codes1 if c > 1]
     uniq2 = [c for c in codes2 if c > 1]
+    print(uniq1)
+    print(uniq2)
 
     if len(uniq1) != len(uniq2):
         raise ValueError(f"Meshes have different number of boundary codes: {len(uniq1)} vs {len(uniq2)}")
@@ -324,8 +351,8 @@ def merge(mesh1, mesh2, debug=False):
 
 
 if __name__ == "__main__":
-    mesh1_file = r"C:\Projects\Merge Gridded Mesh\20250606\cropsWesternSG3\D2-L-merged_V2.mesh"
-    mesh2_file = r"C:\Projects\Merge Gridded Mesh\20250606\cropsWesternSG3\BanI-20250606_cropsWesternSG3 - Conv.mesh"
+    mesh1_file = r"C:\Users\mohm\Downloads\File 1-2 BanR BandI\2_3_I_cropped_sharedcode.mesh"
+    mesh2_file = r"C:\Users\mohm\Downloads\File 1-2 BanR BandI\1_1_R_cropped_nobnd_sharedcode.mesh"
     codes_list = [[2, 2], [3, 3], [4,4], [5,5], [6,6], [7,7]]
     out_file = r"C:\Projects\Merge Gridded Mesh\20250606\cropsWesternSG3\D2-L-I-merged.mesh"
-    merge(mesh1_file, mesh2_file, codes_list, out_file, debug=False)
+    merge(mesh1_file, mesh2_file, debug=True)
